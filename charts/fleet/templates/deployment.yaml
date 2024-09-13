@@ -29,12 +29,13 @@ spec:
         heritage: {{ .Release.Service }}
         release: {{ .Release.Name }}
     spec:
+      imagePullSecrets:
+        - name: tl-docker-registry
       containers:
-        imagePullSecrets:
-          - name: tl-docker-registry
       - name: fleet
         command: [/usr/bin/fleet]
         args: ["serve"]
+        image: "{{ .Values.imageRepository }}:{{ .Values.imageTag }}"
         ports:
         - name: fleet
           containerPort: {{ .Values.fleet.listenPort }}

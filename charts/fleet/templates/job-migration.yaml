@@ -32,6 +32,8 @@ spec:
         release: {{ .Release.Name }}
     spec:
       restartPolicy: Never
+      imagePullSecrets:
+        - name: tl-docker-registry
       containers:
       - name: fleet-migration
         command: [/usr/bin/fleet]
